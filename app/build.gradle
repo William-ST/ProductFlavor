@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+//        applicationId "sulca.pe.productflavors"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        uat {
+            minifyEnabled true
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        sumar {
+            applicationId "sulca.pe.productflavors.sumar"
+            versionName "1.0-demo"
+        }
+        multi {
+            applicationId "sulca.pe.productflavors.multi"
+            versionName "1.0-full"
+        }
+    }
+
+    sourceSets {
+
+        multi {
+            java.srcDirs = ['src/multi/java', 'src/dev/java/']
+        }
+
+        sumar {
+            java.srcDirs = ['src/sumar/java', 'src/dev/java/']
+        }
+
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.2.0'
+    testCompile 'junit:junit:4.12'
+}
